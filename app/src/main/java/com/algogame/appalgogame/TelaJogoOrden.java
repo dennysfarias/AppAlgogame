@@ -89,9 +89,9 @@ public class TelaJogoOrden extends AppCompatActivity {
         ListaAlg.add("fim");
 
 
+
+
         ListaAlgAdapt.notifyDataSetChanged();
-
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Objetivo do Nível")

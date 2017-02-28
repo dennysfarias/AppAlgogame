@@ -29,7 +29,7 @@ public class TelaJogoME extends AppCompatActivity {
 
 
     ProgressBar barraProg;
-    int contadorTempo = 60;
+    int contadorTempo = 30;
 
 
 
