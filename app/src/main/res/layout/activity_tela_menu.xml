@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_tela_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.algogame.appalgogame.TelaMenu"
+    android:weightSum="1">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="34dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Jogador"
+            android:gravity="start"
+            android:layout_alignParentLeft="true"
+
+
+            android:textSize="18sp"
+            android:id="@+id/nome_jogador" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Pontuação Máxima: X "
+            android:layout_alignParentRight="true"
+
+            android:textSize="13sp"
+            android:id="@+id/pontuacao" />
+
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/button2"
+        android:onClick="irTelaNovoJogo"
+        android:text="@string/bt_novo_jogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/background_light"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:text="@string/bt_tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:onClick="irTelaTutorial"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/background_light"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:text="@string/bt_comp_pont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:onClick="irTelaCompartilharPt"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/background_light"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:text="@string/bt_sobre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:layout_marginBottom="200dp"
+        android:onClick="irTelaSobre"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/background_light" />
+
+</LinearLayout>

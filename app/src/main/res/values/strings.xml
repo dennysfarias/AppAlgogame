@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AppAlgogame</string>
+    <string name="txt_nome">Nome</string>
+    <string name="txt_nome_hint">Digite seu nome...</string>
+    <string name="bt_OK">OK</string>
+    <string name="bt_novo_jogo">Novo Jogo</string>
+    <string name="bt_tutorial">Tutorial</string>
+    <string name="bt_comp_pont">Compartilhar Pontuação</string>
+    <string name="bt_sobre">Sobre</string>
+    <string name="modoJogo_ord">Ordenação</string>
+    <string name="modoJogo_mult">Múltipla Escolha</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
