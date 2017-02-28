@@ -170,10 +170,10 @@ public class TelaJogoME extends AppCompatActivity {
             contadorTempo = contadorTempo - 1;
             barraProg.setProgress(contadorTempo);
 
-            if(millisUntilFinished/1000 <=15){
+            if(millisUntilFinished/1000 <=10){
                 barraProg.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
 
-            }else if(millisUntilFinished/1000<=29){
+            }else if(millisUntilFinished/1000<=15){
                 barraProg.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
 
             }else if(millisUntilFinished/1000>=30){
