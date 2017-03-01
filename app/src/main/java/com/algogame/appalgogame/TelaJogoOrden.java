@@ -15,12 +15,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.mobeta.android.dslv.DragSortListView;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
 
 public class TelaJogoOrden extends AppCompatActivity {
+
+
     ArrayList<String> ListaAlg;
 
 
@@ -47,24 +48,13 @@ public class TelaJogoOrden extends AppCompatActivity {
         ListaAlgAdapt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ListaAlg);
 
 
-        DragSortListView ListaPrincipal = (DragSortListView) findViewById(R.id.ListaPrincipalME);
+        ListView ListaPrincipal = (ListView) findViewById(R.id.ListaPrincipalME);
         ListaPrincipal.setAdapter(ListaAlgAdapt);
 
 
 
 
-        ListaPrincipal.setDropListener(new DragSortListView.DropListener() {
-             @Override
-            public void drop(int from, int to) {
-                String movedItem = ListaAlg.get(from);
-                 ListaAlg.remove(from);
-                 if(from>to)--from;
-                 ListaAlg.add(to, movedItem);
-                 ListaAlgAdapt.notifyDataSetChanged();
-            }
 
-
-        });
 
 
 
