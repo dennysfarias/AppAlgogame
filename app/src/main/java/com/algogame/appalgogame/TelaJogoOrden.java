@@ -25,8 +25,7 @@ public class TelaJogoOrden extends AppCompatActivity {
     ArrayList<String> ListaAlg;
 
 
-    ArrayAdapter ListaAlgAdapt;
-
+    StableArrayAdapter ListaAlgAdapt;
 
 
     int posicaoObj;
@@ -39,24 +38,15 @@ public class TelaJogoOrden extends AppCompatActivity {
         setContentView(R.layout.activity_tela_jogo_orden);
 
 
-        barraProg = (ProgressBar)findViewById(R.id.barraProgresso);
+        barraProg = (ProgressBar) findViewById(R.id.barraProgresso);
         barraProg.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
 
 
-
         ListaAlg = new ArrayList<>();
-        ListaAlgAdapt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ListaAlg);
+        ListaAlgAdapt = new StableArrayAdapter(this, R.layout.text_view, ListaAlg);
 
 
-        ListView ListaPrincipal = (ListView) findViewById(R.id.ListaPrincipalME);
-        ListaPrincipal.setAdapter(ListaAlgAdapt);
-
-
-
-
-
-
-
+        DynamicListView ListaPrincipal = (DynamicListView) findViewById(R.id.ListaPrincipalOrden);
 
 
 
@@ -79,175 +69,15 @@ public class TelaJogoOrden extends AppCompatActivity {
         ListaAlg.add("fim");
 
 
-
-
         ListaAlgAdapt.notifyDataSetChanged();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Objetivo do Nível")
-                .setMessage(objetivo)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        timer.start();
-                    }
-                });
-        final AlertDialog dialog = builder.create();
-        dialog.show();
+
+
+        ListaPrincipal.setCheeseList(ListaAlg);
+        ListaPrincipal.setAdapter(ListaAlgAdapt);
+        ListaPrincipal.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    CountDownTimer timer = new CountDownTimer(60*1000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            contadorTempo = contadorTempo - 1;
-            barraProg.setProgress(contadorTempo);
-
-            if(millisUntilFinished/1000 <=15){
-                barraProg.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-
-            }else if(millisUntilFinished/1000<=29){
-                barraProg.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
-
-            }else if(millisUntilFinished/1000>=30){
-                barraProg.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-
-            }else if(millisUntilFinished/1000==0){
-                timer.onFinish();
-            }
-        }
-
-
-        @Override
-        public void onFinish() {
-            Perdeu();
-
-        }
-    };
-
-
-
-
-
-    public void Perdeu( /*int pontuação */   ){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Você perdeu")
-                .setMessage("Sua pontuação é:" + "N/A")
-                .setPositiveButton("Sair", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Context context = getApplicationContext();
-
-                        startActivity(new Intent(context, TelaMenu.class));
-
-                    }
-                });
-        builder.show();
-        this.finish();
-
-
-    }
-
-
-
-
-
-
-    public void Ganhou(){
-
-        //Calcular a pontuação baseado no tempo
-
-        int pontuação = contadorTempo * 10;
-
-
-
-        //Mostrar saudação de vitória
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Você ganhou")
-                .setMessage("Parabéns, sua pontuação atual é: " + pontuação)
-                .setPositiveButton("Próximo", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //chamar próxima fase ao clicar no botão
-
-                        Context context = getApplicationContext();
-
-                        startActivity(new Intent(context, TelaMenu.class));
-
-
-
-                    }
-                });
-        builder.show();
-        timer.cancel();
-        this.finish();
-    }
-
-
-
-
-
-
-    public void verificarCodigo(View v){
-
-        //verifica se a opção selecionada está correta e chama o método para calcular a pontuação e levar para a próxima fase
-
-        if(ListaAlgAdapt.getItem(posicaoObj).equals("...")){
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setTitle("Cuidado!")
-                    .setMessage("Você não escolheu nenhuma opção, escolha uma opção para continuar")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Context context = getApplicationContext();
-                            dialog.dismiss();
-
-
-
-                        }
-                    });
-
-            builder.show();
-
-
-
-
-        }else{
-
-            /*
-            if(ListaAlgAdapt.getItem(posicaoObj).toString().contains(linhaCorreta)){
-                Ganhou();
-            }else{
-                Perdeu();
-            }
-            */
-
-        }
-    }
-
-
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.algogame.appalgogame;
 
+import android.animation.ObjectAnimator;
 import android.view.View;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,8 @@ public class TelaJogoME extends AppCompatActivity {
 
         ListaAlg = new ArrayList<>();
         ListaAlgAdapt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ListaAlg);
+
+
 
 
         final ListView ListaPrincipal = (ListView) findViewById(R.id.ListaPrincipalME);
@@ -99,9 +104,16 @@ public class TelaJogoME extends AppCompatActivity {
 
 
 
+
+
+
+
         ListaPrincipal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
 
 
                 if (ListaPrincipal.getItemAtPosition(position).toString().contains("...")) {
@@ -119,12 +131,19 @@ public class TelaJogoME extends AppCompatActivity {
 
 
 
+
+
+
+
     }
+
+    //Fim do onCreate
 
 
     public void mostrarOpcoes(final int position) {
 
         final ArrayList<String> listaOp = new ArrayList<>();
+        listaOp.add("...");
         listaOp.add("media = (nota1 + nota2) / 2");
         listaOp.add("media == nota1 + nota2 / 2");
         listaOp.add("nota = media - nota1 + nota 2");
@@ -164,11 +183,18 @@ public class TelaJogoME extends AppCompatActivity {
 
 
 
-    CountDownTimer timer = new CountDownTimer(60*1000, 1000) {
+    CountDownTimer timer = new CountDownTimer(30*1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             contadorTempo = contadorTempo - 1;
             barraProg.setProgress(contadorTempo);
+
+
+            TextView txtTempoRestante = (TextView)findViewById(R.id.texttemporestante);
+
+            txtTempoRestante.setText("Tempo restante: "+ Integer.toString(contadorTempo));
+
+
 
             if(millisUntilFinished/1000 <=10){
                 barraProg.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -180,13 +206,21 @@ public class TelaJogoME extends AppCompatActivity {
                 barraProg.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
 
             }else if(millisUntilFinished/1000==0){
+                barraProg.setProgress(0);
                 timer.onFinish();
+
+
             }
+
+
+
+
         }
 
 
         @Override
         public void onFinish() {
+            barraProg.setProgress(0);
             Perdeu();
 
         }
@@ -214,8 +248,6 @@ public class TelaJogoME extends AppCompatActivity {
                 });
                 builder.show();
 
-
-                this.finish();
     }
 
 
@@ -251,7 +283,6 @@ public class TelaJogoME extends AppCompatActivity {
                 });
         builder.show();
         timer.cancel();
-        this.finish();
     }
 
 
@@ -268,7 +299,7 @@ public class TelaJogoME extends AppCompatActivity {
             Builder builder = new Builder(this);
 
             builder.setTitle("Cuidado!")
-                    .setMessage("Você não escolheu nenhuma opção, escolha uma opção para continuar")
+                    .setMessage("Nenhuma alternativa selecionada, escolha uma para continuar")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
