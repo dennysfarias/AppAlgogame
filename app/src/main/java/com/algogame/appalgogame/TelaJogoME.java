@@ -1,6 +1,5 @@
 package com.algogame.appalgogame;
 
-import android.animation.ObjectAnimator;
 import android.view.View;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
