@@ -1,6 +1,9 @@
 package com.algogame.appalgogame;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +24,11 @@ public class TelaInicial extends AppCompatActivity {
 
         //criação do objeto:
         editNome = (EditText) findViewById(R.id.edit_nome);
+
+
+
+
+
     }
 
     public void irTelaMenu(View v) {
@@ -35,7 +43,13 @@ public class TelaInicial extends AppCompatActivity {
 
             Intent i = new Intent(this, TelaMenu.class);
             i.putExtra("nomeJogador", nomeDigitado);
-            startActivity( i );
+            ContentValues dados = new ContentValues();
+            dados.put("nome", nomeDigitado);
+            DatabaseAlg db = new DatabaseAlg();
+            db.inicializarDB(this);
+            db.addJogador(this, dados);
+
+            startActivity(i);
             this.finish();
 
         }else {

@@ -1,5 +1,6 @@
 package com.algogame.appalgogame;
 
+import android.database.Cursor;
 import android.view.View;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,9 +17,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class TelaJogoME extends AppCompatActivity {
+
+
+
+    TextView txt_nomeJogador;
 
     ArrayList<String> ListaAlg;
     ArrayAdapter<String> ListaAlgAdapt;
@@ -27,17 +34,25 @@ public class TelaJogoME extends AppCompatActivity {
     int posicaoObj;
     int opcaoSelecionada = 0;
     String op;
-
-
     ProgressBar barraProg;
     int contadorTempo = 30;
 
-
+    DatabaseAlg db = new DatabaseAlg();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela__jogo__me);
+
+
+        db.inicializarDB(this);
+
+        txt_nomeJogador = (TextView)findViewById(R.id.txt_nomeJogador);
+
+        Cursor jogador = db.consultJogador();
+        jogador.moveToFirst();
+        jogador.getString(1);
+        txt_nomeJogador.setText(jogador.getString(1));
 
         posicaoObj = 0;
         barraProg = (ProgressBar)findViewById(R.id.barraProgresso);
@@ -46,23 +61,13 @@ public class TelaJogoME extends AppCompatActivity {
         ListaAlg = new ArrayList<>();
         ListaAlgAdapt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ListaAlg);
 
-
-
-
         final ListView ListaPrincipal = (ListView) findViewById(R.id.ListaPrincipalME);
 
-
         ListaPrincipal.setAdapter(ListaAlgAdapt);
-
-
-
-
 
         String objetivo = "Seu algoritmo deverá ler dois valores e calcular a média aritmética " +
                 "destes e informar se o aluno foi aprovado ou não, sendo" +
                 " a média mínima de aprovação, 7.";
-
-
 
 
         ListaAlg.add("Início");
@@ -97,47 +102,19 @@ public class TelaJogoME extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-
-
-
-
-
-
-
-
-
         ListaPrincipal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-
-
-
                 if (ListaPrincipal.getItemAtPosition(position).toString().contains("...")) {
-
                     mostrarOpcoes(position);
                     posicaoObj  = position;
-
                     ListaAlgAdapt.notifyDataSetChanged();
-
                 }
-
-
             }
         });
-
-
-
-
-
-
-
     }
 
     //Fim do onCreate
-
-
     public void mostrarOpcoes(final int position) {
 
         final ArrayList<String> listaOp = new ArrayList<>();
@@ -152,48 +129,29 @@ public class TelaJogoME extends AppCompatActivity {
         final Builder builder1 = new Builder(this);
         builder1.setTitle("Escolha a opção correta");
 
-
-
         builder1.setSingleChoiceItems(opcoes, -1, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 opcaoSelecionada = which;
-
                 op = opcoes.getItem(which);
-
 
                 ListaAlg.set(position, "... <- " + op);
                 ListaAlgAdapt.notifyDataSetChanged();
 
                 dialog.dismiss();
 
-
-
             }
         });
         builder1.show();
-
-
-
     }
-
-
-
 
     CountDownTimer timer = new CountDownTimer(30*1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             contadorTempo = contadorTempo - 1;
             barraProg.setProgress(contadorTempo);
-
-
             TextView txtTempoRestante = (TextView)findViewById(R.id.texttemporestante);
-
             txtTempoRestante.setText("Tempo restante: "+ Integer.toString(contadorTempo));
-
-
-
             if(millisUntilFinished/1000 <=10){
                 barraProg.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
 
@@ -209,24 +167,17 @@ public class TelaJogoME extends AppCompatActivity {
 
 
             }
-
-
-
-
         }
+
+
 
 
         @Override
         public void onFinish() {
             barraProg.setProgress(0);
             Perdeu();
-
         }
     };
-
-
-
-
 
     public void Perdeu( /*int pontuação */   ){
 
@@ -247,20 +198,11 @@ public class TelaJogoME extends AppCompatActivity {
                 builder.show();
 
     }
-
-
-
-
-
-
     public void Ganhou(){
 
         //Calcular a pontuação baseado no tempo
 
         int pontuação = contadorTempo * 10;
-
-
-
         //Mostrar saudação de vitória
         Builder builder = new Builder(this);
 
@@ -275,19 +217,11 @@ public class TelaJogoME extends AppCompatActivity {
 
                         startActivity(new Intent(context, TelaMenu.class));
 
-
-
                     }
                 });
         builder.show();
         timer.cancel();
     }
-
-
-
-
-
-
     public void verificarCodigo(View v){
 
         //verifica se a opção selecionada está correta e chama o método para calcular a pontuação e levar para a próxima fase
@@ -305,15 +239,10 @@ public class TelaJogoME extends AppCompatActivity {
                             Context context = getApplicationContext();
                             dialog.dismiss();
 
-
-
                         }
                     });
 
             builder.show();
-
-
-
 
         }else{
             if(ListaAlgAdapt.getItem(posicaoObj).toString().contains(linhaCorreta)){

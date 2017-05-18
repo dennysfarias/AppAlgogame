@@ -25,8 +25,6 @@ public class TelaJogoOrden extends AppCompatActivity {
     ArrayList<String> ListaAlg;
 
 
-    StableArrayAdapter ListaAlgAdapt;
-
 
     int posicaoObj;
     ProgressBar barraProg;
@@ -43,10 +41,7 @@ public class TelaJogoOrden extends AppCompatActivity {
 
 
         ListaAlg = new ArrayList<>();
-        ListaAlgAdapt = new StableArrayAdapter(this, R.layout.text_view, ListaAlg);
 
-
-        DynamicListView ListaPrincipal = (DynamicListView) findViewById(R.id.ListaPrincipalOrden);
 
 
 
@@ -69,13 +64,6 @@ public class TelaJogoOrden extends AppCompatActivity {
         ListaAlg.add("fim");
 
 
-        ListaAlgAdapt.notifyDataSetChanged();
-
-
-
-        ListaPrincipal.setCheeseList(ListaAlg);
-        ListaPrincipal.setAdapter(ListaAlgAdapt);
-        ListaPrincipal.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 
 
