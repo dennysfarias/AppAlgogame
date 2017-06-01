@@ -12,16 +12,6 @@
     tools:context="com.algogame.appalgogame.TelaNovoJogo">
 
     <Button
-        android:text="@string/modoJogo_ord"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:background="@android:color/holo_blue_light"
-        android:textColor="@android:color/background_light"
-        android:layout_marginBottom="20dp"
-        android:onClick="novoJogoOrden" />
-
-    <Button
         android:text="@string/modoJogo_mult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

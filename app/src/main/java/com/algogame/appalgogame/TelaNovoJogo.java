@@ -26,7 +26,11 @@ public class TelaNovoJogo extends AppCompatActivity {
 
     public void novoJogoMult(View v){
 
-        startActivity(new Intent(this, TelaJogoME.class));
+        Intent i = new Intent(this, TelaJogoME.class);
+        i.putExtra("algoritmoSelecionado", "1");
+        i.putExtra("pontInicial", "0");
+
+        startActivity(i);
         this.finish();
 
     }

@@ -12,4 +12,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtSobre">Este app foi desenvolvido como projeto de TCC do Curso de Tecnologia em Análise e Desenvolvimento de Sistemas pelos discentes Dennys Farias, Denilson Nogueira e Renatos Santos sob orientação do Profº Msc. Alan Marcel Souza. Todos direitos reservados.</string>
 </resources>

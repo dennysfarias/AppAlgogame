@@ -39,7 +39,7 @@
             android:layout_alignParentRight="true"
 
             android:textSize="13sp"
-            android:id="@+id/pontuacao" />
+            android:id="@+id/pontuacaoTelaMenu" />
 
 
     </RelativeLayout>
