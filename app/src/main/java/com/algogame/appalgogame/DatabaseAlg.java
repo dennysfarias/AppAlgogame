@@ -130,9 +130,9 @@ public class DatabaseAlg extends AppCompatActivity {
 
 
             //Alternativas
-            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >=1 ou <=9) então',   0);");
-            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >10 ou <0) então',   0);");
-            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >=1 e <=9) então',   1);");
+            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >=1 ou valor <=9) então',   0);");
+            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >10 e valor <0) então',   0);");
+            db.execSQL("INSERT INTO tab_opcoesCorretas values (?, 2, 'se(valor >=1 e valor <=9) então',   1);");
 
 
 

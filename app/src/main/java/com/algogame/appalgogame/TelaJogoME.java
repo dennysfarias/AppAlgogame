@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class TelaJogoME extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela__jogo__me);
 
-        nivelAtual = (TextView)findViewById(R.id.txt_nivelAtual);
+        nivelAtual = (TextView) findViewById(R.id.txt_nivelAtual);
 
 
         Intent i = getIntent();
@@ -80,7 +81,7 @@ public class TelaJogoME extends AppCompatActivity {
         jogador.moveToFirst();
         jogador.getString(1);
         txt_nomeJogador.setText(jogador.getString(1));
-        nivelAtual.setText("Nível: "+algoritmoSelecionado);
+        nivelAtual.setText("Nível: " + algoritmoSelecionado);
         posicaoObj = 0;
         barraProg = (ProgressBar) findViewById(R.id.barraProgresso);
         barraProg.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -140,7 +141,7 @@ public class TelaJogoME extends AppCompatActivity {
                 opcaoSelecionada = which;
                 op = opcoes.getItem(which);
                 ListaAlgAdapt.remove(ListaAlgAdapt.getItem(position));
-                ListaAlgAdapt.insert(position+1 +".  " +"--> " + op, position);
+                ListaAlgAdapt.insert(position + 1 + ".  " + "--> " + op, position);
                 ListaAlgAdapt.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -194,14 +195,15 @@ public class TelaJogoME extends AppCompatActivity {
 
                         //Algoritmoselecionado (Fase) para continuidade
                         int algSelect = Integer.decode(algoritmoSelecionado);
-                        algSelect = algSelect +1;
+                        algSelect = algSelect + 1;
                         String tmpStr = String.valueOf(algSelect);
-                        if(algSelect==6){
+                        if (algSelect == 6) {
                             db.atulizarPontuacao(pontIntent);
-
-                            Intent irTelaMenu = new Intent(getApplicationContext(), TelaMenu.class);
+                            Toast.makeText(getApplicationContext(), "Você finalizou o algoGame, fique ligado nas próximas atualizações para mais níveis", Toast.LENGTH_SHORT).show();
+                            Intent irTelaMenu = new Intent(context, TelaMenu.class);
                             startActivity(irTelaMenu);
-                        }else{
+
+                        } else {
                             Intent i = new Intent(context, TelaJogoME.class);
 
                             i.putExtra("algoritmoSelecionado", tmpStr);
@@ -226,7 +228,9 @@ public class TelaJogoME extends AppCompatActivity {
 
         //verifica se a opção selecionada está correta e chama o método para calcular a pontuação e levar para a próxima fase
 
-        if (ListaAlgAdapt.getItem(posicaoObj).contentEquals("...")) {
+        boolean escolheuReticencias = ListaAlgAdapt.getItem(posicaoObj).contains("...");
+
+        if ( escolheuReticencias ) {
 
             Builder builder = new Builder(this);
 
@@ -271,7 +275,7 @@ public class TelaJogoME extends AppCompatActivity {
             Cursor cursor = db.consultarAlgoritmo(algoritmoSelecionado);
             cursor.moveToPosition(-1);
             while (cursor.moveToNext()) {
-                aAdapter.add(cursor.getPosition()+1+ ".  " + cursor.getString(2));
+                aAdapter.add(cursor.getPosition() + 1 + ".  " + cursor.getString(2));
                 if (cursor.getString(2).equals("...")) {
                     posicaoObj = cursor.getPosition();
                 }
@@ -285,6 +289,23 @@ public class TelaJogoME extends AppCompatActivity {
         return aAdapter;
 
 
+    }
+
+
+
+
+    public void mostrarObjetivo(View v){
+        final Builder builder = new Builder(this);
+        builder.setTitle("Objetivo do nível:")
+                .setMessage(objetivo)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

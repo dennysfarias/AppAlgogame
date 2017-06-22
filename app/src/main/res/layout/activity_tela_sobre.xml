@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_tela_sobre"
     android:layout_width="match_parent"
@@ -10,14 +11,49 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.algogame.appalgogame.TelaSobre"
-    android:gravity="bottom">
+    android:gravity="top">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewFinal"
         android:text="@string/txtSobre"
-        android:gravity="center"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/iconealgogame"
+        android:id="@+id/imageView"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tem alguma critica ou sugestão? Contate-nos e nos dê seu feedback!"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+
+        >
+
+
+        <Button
+            android:id="@+id/buttonTelaSobre"
+            android:onClick="contateNos"
+            android:text="Contate-nos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/background_light"
+            />
+
+    </RelativeLayout>
+
+
 </LinearLayout>

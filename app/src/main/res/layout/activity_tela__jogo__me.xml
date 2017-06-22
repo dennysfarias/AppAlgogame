@@ -106,10 +106,24 @@
         app:fabSize="auto"
         app:elevation="7dp"
         app:backgroundTint="@android:color/holo_blue_dark"
-        app:srcCompat="?android:attr/textCheckMarkInverse"
+        app:srcCompat="@drawable/ic_done_white_32dp_2x"
         android:clickable="true"
         android:onClick="verificarCodigo" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|start"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            app:fabSize="auto"
+            app:elevation="7dp"
+            app:backgroundTint="@android:color/holo_blue_dark"
+            app:srcCompat="@drawable/ic_announcement_white_36dp"
+            android:clickable="true"
+            android:onClick="mostrarObjetivo" />
 
 </RelativeLayout>
 
